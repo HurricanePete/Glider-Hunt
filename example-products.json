@@ -1,0 +1,12 @@
+{
+	"manufacturer": "Ozone",
+	"name": "Mojo",
+	"sizes": ["small", "medium", "large"],
+	"pricing": ["3500 usd", "3150 euro", "3000 gbp"]
+},
+{
+	"manufacturer": "Ozone",
+	"name": "Speedster",
+	"sizes": ["small", "medium", "large"],
+	"pricing": ["3500 usd", "3150 euro", "3000 gbp"]
+}
