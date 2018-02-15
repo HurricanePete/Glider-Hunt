@@ -1,19 +1,18 @@
 require('dotenv').config();
-const bodyparser = require('body-parser');
+const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 const {PORT, DATABASE_URL} = require('./config');
 
-const Products = require('/models');
+const {Products} = require('./models');
 
 mongoose.Promise = global.Promise;
 
 const app = express();
 
 app.use(bodyParser.json());
-
 app.use(morgan('common'));
 
 app.use(function(req, res, next) {
@@ -28,12 +27,25 @@ app.use(function(req, res, next) {
 
 app.get('/api/all', (req, res) => {
 	return Products
-	.find().
+	.find()
 	.exec()
 	.then(products => {
 		res.json(products);
 	})
 });
+
+app.get('/api/:id', (req, res) => {
+	return Products
+	.findById(req.params.id)
+	.exec()
+	.then(product => {
+		res.json(product)
+	})
+	.catch(err => {
+		console.error(err);
+		res.status(500).json({error: 'Something went wrong'});
+	})
+})
 
 app.post('/api', (req, res) => {
 	const requiredFields = ['manufacturer', 'name', 'sizes', 'pricing'];
@@ -54,7 +66,7 @@ app.post('/api', (req, res) => {
 			name: req.body.name,
 			sizes: req.body.sizes,
 			pricing: req.body.pricing
-		});
+		})
 		.then(product => res.status(201).json(product))
 		.catch(err => {
 			console.error(err);

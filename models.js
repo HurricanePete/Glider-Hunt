@@ -1,8 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.Promise = global.Promise;
-
-const ProductSchema = mongoose.Schema({
+const productSchema = mongoose.Schema({
 	manufacturer: {
 		type: String,
 		required: true
@@ -21,6 +19,6 @@ const ProductSchema = mongoose.Schema({
 	}
 })
 
-const Products = mongoose.model('Products', ProductSchema);
+const Products = mongoose.model('Products', productSchema);
 
 module.exports = {Products};
