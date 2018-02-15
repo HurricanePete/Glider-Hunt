@@ -27,4 +27,5 @@ The RESTful API serves 5 endpoints:
   The ID from the URL and the ID from the request body must match
 
 - A DELETE request to /api/:productId will delete an individual product with the matching ID if it exists
+***
   Nothing is return by the server from a DELETE request
