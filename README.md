@@ -29,3 +29,9 @@ The RESTful API serves 5 endpoints:
 - A DELETE request to /api/:productId will delete an individual product with the matching ID if it exists       
 
   Nothing is return by the server from a DELETE request
+
+## Technologies
+
+- Javascript
+- Node.js
+- Express
