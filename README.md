@@ -1,7 +1,7 @@
 # Glider-Hunt
 RESTful API prototype for Glider Hunt - find your perfect glider
 
-##API Docs
+## API Docs
 
 The RESTful API serves 5 endpoints:
 
