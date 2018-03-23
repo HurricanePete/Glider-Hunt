@@ -21,4 +21,17 @@ const productSchema = mongoose.Schema({
 
 const Products = mongoose.model('Products', productSchema);
 
-module.exports = {Products};
+const emailSchema = mongoose.Schema({
+	name: {
+		type: String,
+		required: false
+	},
+	email: {
+		type: String,
+		required: true
+	}
+})
+
+const Emails = mongoose.model('Emails', emailSchema);
+
+module.exports = {Products, Emails};
