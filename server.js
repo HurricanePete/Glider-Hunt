@@ -6,7 +6,7 @@ const morgan = require('morgan');
 
 const {PORT, DATABASE_URL} = require('./config');
 
-const {Products} = require('./models');
+const {Products, Emails} = require('./models');
 
 mongoose.Promise = global.Promise;
 
@@ -106,6 +106,38 @@ app.put('/api/:id', (req, res) => {
 		.exec()
 		.then(updatedPost => res.status(201).json(updatedPost))
 		.catch(err => res.status(500).json({message: 'Something went wrong'}));
+});
+
+app.get('/contact', (req, res) => {
+	return Emails
+		.find()
+		.exec()
+		.then(emails => res.status(201).json(emails))
+});
+
+app.post('/contact', (req, res) => {
+	const requiredFields = ['email'];
+	const missingField = requiredFields.find(field => !(field in req.body));
+
+	if(missingField) {
+		return res.status(422).json({
+			code: 422,
+			reason: 'ValidationError',
+			message: 'missing Field',
+			location: missingField
+		});
+	}
+
+	return Emails
+		.create({
+			email: req.body.email,
+			name: req.body.name !== undefined ? req.body.name : 'N/A'
+		})
+		.then(contact => res.status(201).json(contact))
+		.catch(err => {
+			console.error(err);
+			res.status(500).json({error: 'Something went wrongs'});
+		});
 });
 
 let server;
